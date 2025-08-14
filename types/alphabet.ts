@@ -3,4 +3,3 @@ export interface AlphabetItem {
   girlLink: string
   boyLink: string
 }
-

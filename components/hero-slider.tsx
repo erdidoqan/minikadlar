@@ -98,4 +98,3 @@ export function HeroSlider({ slides, autoPlayInterval = 5000 }: SliderProps) {
     </div>
   )
 }
-

@@ -219,3 +219,97 @@ export function generateBlogListingStructuredData({
   }
 }
 
+interface NameListingStructuredDataProps {
+  title: string
+  description: string
+  url: string
+  names: Array<{
+    title: string
+    description: string
+    url: string
+    imageUrl: string
+    publishDate: string
+  }>
+  breadcrumbs: Array<{
+    name: string
+    item: string
+  }>
+}
+
+export function generateNameListingStructuredData({
+  title,
+  description,
+  url,
+  names,
+  breadcrumbs,
+}: NameListingStructuredDataProps) {
+  const websiteSchema = {
+    "@type": "WebSite",
+    "@id": `${process.env.NEXT_PUBLIC_SITE_URL}/#website`,
+    url: process.env.NEXT_PUBLIC_SITE_URL,
+    name: "MinikAdlar",
+    publisher: {
+      "@type": "Organization",
+      name: "MinikAdlar",
+      logo: {
+        "@type": "ImageObject",
+        url: `${process.env.NEXT_PUBLIC_SITE_URL}/logo.png`,
+      },
+    },
+  }
+
+  const organizationSchema = {
+    "@type": "Organization",
+    name: "MinikAdlar",
+    url: process.env.NEXT_PUBLIC_SITE_URL,
+    logo: {
+      "@type": "ImageObject",
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/logo.png`,
+    },
+  }
+
+  const breadcrumbSchema = {
+    "@type": "BreadcrumbList",
+    itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@id": breadcrumb.item,
+        name: breadcrumb.name,
+      },
+    })),
+  }
+
+  const itemListSchema = {
+    "@type": "ItemList",
+    itemListElement: names.map((name, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "Article",
+        headline: name.title,
+        description: name.description,
+        url: name.url,
+        image: name.imageUrl,
+        datePublished: name.publishDate,
+        publisher: organizationSchema,
+      },
+    })),
+  }
+
+  const webPageSchema = {
+    "@type": "WebPage",
+    "@id": url,
+    url: url,
+    name: title,
+    description: description,
+    breadcrumb: breadcrumbSchema,
+    publisher: organizationSchema,
+    isPartOf: websiteSchema,
+  }
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [websiteSchema, organizationSchema, breadcrumbSchema, itemListSchema, webPageSchema],
+  }
+}

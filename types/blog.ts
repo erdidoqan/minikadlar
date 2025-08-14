@@ -7,4 +7,3 @@ export interface BlogPost {
   date: string
   slug: string
 }
-

@@ -4,7 +4,7 @@ import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardFooter } from "@/components/ui/card"
 import { getNotionBlogPosts } from "@/lib/notion"
-import { formatDate, slugify, generateImageUrl } from "@/lib/utils"
+import { formatDate, generateImageUrl, getNotionSlug } from "@/lib/utils"
 import { LoadingPosts } from "./loading-posts"
 import { ErrorMessage } from "./error-message"
 import type { NotionBlogPost } from "@/types/notion"
@@ -25,13 +25,11 @@ async function BlogPostsList() {
     }
 
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {posts.map((post: NotionBlogPost) => {
           console.log("Rendering post:", post.id)
           const title = post.properties.Name?.title?.[0]?.plain_text || "Untitled"
-          const slug = slugify(title)
           const tag = post.properties.Tags?.multi_select?.[0]?.name || "uncategorized"
-          const slugifiedTag = slugify(tag)
           const publishDate = post.properties.Published?.date?.start || new Date().toISOString()
           const description = post.properties.Description?.rich_text?.[0]?.plain_text || "No description available."
 
@@ -41,18 +39,18 @@ async function BlogPostsList() {
               ? post.cover.external.url.split("key=")[1]?.split("&")[0] || "default-image.webp"
               : "default-image.webp"
 
-          console.log(`Generated URL: /blog/${slugifiedTag}/${slug}`)
+          console.log(`Generated URL: /isim/${getNotionSlug(post)}`)
 
           return (
             <Card key={post.id} className="overflow-hidden flex flex-col">
-              <Link href={`/blog/${slugifiedTag}/${slug}`} className="flex flex-col h-full">
+              <Link href={`/isim/${getNotionSlug(post)}`} className="flex flex-col h-full">
                 <div className="relative h-48 w-full">
                   <Image
                     src={generateImageUrl(imageKey, 800, 600) || "/placeholder.svg"}
                     alt={title}
                     fill
                     className="object-cover"
-                    sizes="(min-width: 1280px) 384px, (min-width: 1024px) 288px, (min-width: 768px) 342px, 100vw"
+                    sizes="(min-width: 1280px) 25%, (min-width: 1024px) 33%, (min-width: 640px) 50%, 100vw"
                   />
                   {post.icon?.emoji && <span className="absolute left-4 bottom-4 text-2xl">{post.icon.emoji}</span>}
                 </div>
@@ -108,4 +106,3 @@ export function NotionBlogPosts() {
     </section>
   )
 }
-

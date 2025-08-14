@@ -34,6 +34,23 @@ module.exports = {
       },
       fontFamily: {
         serif: ["Georgia", "Cambria", "Times New Roman", "Times", "serif"],
+        sans: [
+          "Mulish",
+          "ui-sans-serif",
+          "system-ui",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Segoe UI",
+          "Roboto",
+          "Helvetica Neue",
+          "Arial",
+          "Noto Sans",
+          "sans-serif",
+          "Apple Color Emoji",
+          "Segoe UI Emoji",
+          "Segoe UI Symbol",
+          "Noto Color Emoji",
+        ],
       },
       typography: {
         lg: {
@@ -54,4 +71,3 @@ module.exports = {
   },
   plugins: [require("@tailwindcss/typography")],
 }
-

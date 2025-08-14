@@ -1,11 +1,12 @@
-import { Inter } from "next/font/google"
+import { Mulish } from "next/font/google"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import "./globals.css"
 import type React from "react"
 import type { Metadata } from "next"
+import Script from "next/script"
 
-const inter = Inter({ subsets: ["latin"] })
+const mulish = Mulish({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://minikadlar.com"),
@@ -33,21 +34,6 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@minikadlar",
   },
-  icons: {
-    icon: [
-      { url: "/favicon.png" },
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-    ],
-    apple: [{ url: "/apple-touch-icon.png" }],
-    other: [
-      {
-        rel: "mask-icon",
-        url: "/favicon.png",
-      },
-    ],
-  },
-  manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
@@ -59,7 +45,17 @@ export const metadata: Metadata = {
     maximumScale: 1,
   },
   themeColor: "#ff6b6b",
-    generator: 'v0.dev'
+  alternates: {
+    types: {
+      "application/rss+xml": [
+        {
+          url: "rss",
+          title: "MinikAdlar - Bebek İsimleri ve Anlamları",
+        },
+      ],
+    },
+  },
+    generator: 'v0.app'
 }
 
 export default function RootLayout({
@@ -69,7 +65,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="tr">
-      <body className={inter.className}>
+      <body className={mulish.className}>
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3211715013502788"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
         <Header />
         {children}
         <Footer />
@@ -77,7 +79,3 @@ export default function RootLayout({
     </html>
   )
 }
-
-
-
-import './globals.css'

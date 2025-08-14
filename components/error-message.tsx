@@ -23,4 +23,3 @@ export function ErrorMessage({ message, retry }: ErrorMessageProps) {
     </Alert>
   )
 }
-

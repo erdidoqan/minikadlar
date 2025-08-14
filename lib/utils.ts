@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
+import type { NotionBlogPost, NotionNameEntry } from "@/types"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -66,3 +67,59 @@ export function generateSEODescription(content: string, maxLength = 160): string
   return plainText.slice(0, maxLength).trim() + "..."
 }
 
+export function getNotionSlug(post: NotionBlogPost | NotionNameEntry): string {
+  try {
+    // URL property'sini kontrol et
+    const urlFromProperty = post.properties.URL?.rich_text?.[0]?.plain_text?.trim()
+
+    // İsmi al ve doğrula
+    const nameFromProperty = post.properties.Name?.title?.[0]?.plain_text
+    if (!nameFromProperty) {
+      throw new Error("Name property is missing")
+    }
+
+    // Eğer URL property'si varsa ve boş değilse, onu kullan
+    if (urlFromProperty) {
+      // URL'den sadece slug kısmını al (eğer tam URL ise)
+      if (urlFromProperty.includes("/")) {
+        const segments = urlFromProperty.split("/")
+        const lastSegment = segments[segments.length - 1]
+        return lastSegment || slugify(nameFromProperty)
+      }
+      return urlFromProperty
+    }
+
+    // URL yoksa isimden slug oluştur
+    return slugify(nameFromProperty)
+  } catch (error) {
+    console.error("Error generating slug:", error)
+    // Hata durumunda boş string yerine slugify edilmiş bir değer dön
+    const fallbackName = post.properties.Name?.title?.[0]?.plain_text || "untitled"
+    return slugify(fallbackName)
+  }
+}
+
+export function formatNameData(notionPage: NotionNameEntry) {
+  try {
+    const name = notionPage.properties.Name?.title?.[0]?.plain_text
+    if (!name) {
+      throw new Error("Name is required")
+    }
+
+    const slug = getNotionSlug(notionPage)
+    if (!slug) {
+      throw new Error("Could not generate slug")
+    }
+
+    console.log("Formatting name data:", { name, slug, id: notionPage.id })
+
+    return {
+      id: notionPage.id,
+      name,
+      link: `/isim/${slug}`,
+    }
+  } catch (error) {
+    console.error("Error formatting name data:", error)
+    throw error
+  }
+}

@@ -7,34 +7,34 @@ import Link from "next/link"
 import type { AlphabetItem } from "@/types/alphabet"
 
 const alphabet: AlphabetItem[] = [
-  { letter: "A", girlLink: "/kiz-isimleri/a", boyLink: "/erkek-isimleri/a" },
-  { letter: "B", girlLink: "/kiz-isimleri/b", boyLink: "/erkek-isimleri/b" },
-  { letter: "C", girlLink: "/kiz-isimleri/c", boyLink: "/erkek-isimleri/c" },
-  { letter: "Ç", girlLink: "/kiz-isimleri/c", boyLink: "/erkek-isimleri/c" },
-  { letter: "D", girlLink: "/kiz-isimleri/d", boyLink: "/erkek-isimleri/d" },
-  { letter: "E", girlLink: "/kiz-isimleri/e", boyLink: "/erkek-isimleri/e" },
-  { letter: "F", girlLink: "/kiz-isimleri/f", boyLink: "/erkek-isimleri/f" },
-  { letter: "G", girlLink: "/kiz-isimleri/g", boyLink: "/erkek-isimleri/g" },
-  { letter: "H", girlLink: "/kiz-isimleri/h", boyLink: "/erkek-isimleri/h" },
-  { letter: "I", girlLink: "/kiz-isimleri/i", boyLink: "/erkek-isimleri/i" },
-  { letter: "İ", girlLink: "/kiz-isimleri/i", boyLink: "/erkek-isimleri/i" },
-  { letter: "J", girlLink: "/kiz-isimleri/j", boyLink: "/erkek-isimleri/j" },
-  { letter: "K", girlLink: "/kiz-isimleri/k", boyLink: "/erkek-isimleri/k" },
-  { letter: "L", girlLink: "/kiz-isimleri/l", boyLink: "/erkek-isimleri/l" },
-  { letter: "M", girlLink: "/kiz-isimleri/m", boyLink: "/erkek-isimleri/m" },
-  { letter: "N", girlLink: "/kiz-isimleri/n", boyLink: "/erkek-isimleri/n" },
-  { letter: "O", girlLink: "/kiz-isimleri/o", boyLink: "/erkek-isimleri/o" },
-  { letter: "Ö", girlLink: "/kiz-isimleri/o", boyLink: "/erkek-isimleri/o" },
-  { letter: "P", girlLink: "/kiz-isimleri/p", boyLink: "/erkek-isimleri/p" },
-  { letter: "R", girlLink: "/kiz-isimleri/r", boyLink: "/erkek-isimleri/r" },
-  { letter: "S", girlLink: "/kiz-isimleri/s", boyLink: "/erkek-isimleri/s" },
-  { letter: "Ş", girlLink: "/kiz-isimleri/s", boyLink: "/erkek-isimleri/s" },
-  { letter: "T", girlLink: "/kiz-isimleri/t", boyLink: "/erkek-isimleri/t" },
-  { letter: "U", girlLink: "/kiz-isimleri/u", boyLink: "/erkek-isimleri/u" },
-  { letter: "Ü", girlLink: "/kiz-isimleri/u", boyLink: "/erkek-isimleri/u" },
-  { letter: "V", girlLink: "/kiz-isimleri/v", boyLink: "/erkek-isimleri/v" },
-  { letter: "Y", girlLink: "/kiz-isimleri/y", boyLink: "/erkek-isimleri/y" },
-  { letter: "Z", girlLink: "/kiz-isimleri/z", boyLink: "/erkek-isimleri/z" },
+  { letter: "A", girlLink: "/listeler/a", boyLink: "/listeler/a" },
+  { letter: "B", girlLink: "/listeler/b", boyLink: "/listeler/b" },
+  { letter: "C", girlLink: "/listeler/c", boyLink: "/listeler/c" },
+  { letter: "Ç", girlLink: "/listeler/ç", boyLink: "/listeler/ç" },
+  { letter: "D", girlLink: "/listeler/d", boyLink: "/listeler/d" },
+  { letter: "E", girlLink: "/listeler/e", boyLink: "/listeler/e" },
+  { letter: "F", girlLink: "/listeler/f", boyLink: "/listeler/f" },
+  { letter: "G", girlLink: "/listeler/g", boyLink: "/listeler/g" },
+  { letter: "H", girlLink: "/listeler/h", boyLink: "/listeler/h" },
+  { letter: "I", girlLink: "/listeler/ı", boyLink: "/listeler/ı" },
+  { letter: "İ", girlLink: "/listeler/i", boyLink: "/listeler/i" },
+  { letter: "J", girlLink: "/listeler/j", boyLink: "/listeler/j" },
+  { letter: "K", girlLink: "/listeler/k", boyLink: "/listeler/k" },
+  { letter: "L", girlLink: "/listeler/l", boyLink: "/listeler/l" },
+  { letter: "M", girlLink: "/listeler/m", boyLink: "/listeler/m" },
+  { letter: "N", girlLink: "/listeler/n", boyLink: "/listeler/n" },
+  { letter: "O", girlLink: "/listeler/o", boyLink: "/listeler/o" },
+  { letter: "Ö", girlLink: "/listeler/ö", boyLink: "/listeler/ö" },
+  { letter: "P", girlLink: "/listeler/p", boyLink: "/listeler/p" },
+  { letter: "R", girlLink: "/listeler/r", boyLink: "/listeler/r" },
+  { letter: "S", girlLink: "/listeler/s", boyLink: "/listeler/s" },
+  { letter: "Ş", girlLink: "/listeler/ş", boyLink: "/listeler/ş" },
+  { letter: "T", girlLink: "/listeler/t", boyLink: "/listeler/t" },
+  { letter: "U", girlLink: "/listeler/u", boyLink: "/listeler/u" },
+  { letter: "Ü", girlLink: "/listeler/ü", boyLink: "/listeler/ü" },
+  { letter: "V", girlLink: "/listeler/v", boyLink: "/listeler/v" },
+  { letter: "Y", girlLink: "/listeler/y", boyLink: "/listeler/y" },
+  { letter: "Z", girlLink: "/listeler/z", boyLink: "/listeler/z" },
 ]
 
 export function AlphabetList() {
@@ -58,7 +58,7 @@ export function AlphabetList() {
                   {item.letter}
                 </div>
                 <span className="text-gray-700 group-hover:text-primary transition-colors">
-                  {item.letter} ile başlayan kız isimleri
+                  {item.letter} ile başlayan isimler
                 </span>
               </Link>
 
@@ -71,7 +71,7 @@ export function AlphabetList() {
                   {item.letter}
                 </div>
                 <span className="text-gray-700 group-hover:text-primary transition-colors">
-                  {item.letter} ile başlayan erkek isimleri
+                  {item.letter} ile başlayan isimler
                 </span>
               </Link>
             </div>
@@ -90,4 +90,3 @@ export function AlphabetList() {
     </section>
   )
 }
-

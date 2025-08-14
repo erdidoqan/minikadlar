@@ -2,11 +2,16 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Search } from "lucide-react"
+import { Search, Menu } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { MobileMenu } from "@/components/mobile-menu"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const isMobile = useIsMobile()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,6 +20,10 @@ export function Header() {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen)
+  }
 
   return (
     <header
@@ -29,40 +38,48 @@ export function Header() {
             MinikAdlar
           </Link>
 
-          <div className="hidden md:flex items-center space-x-1 flex-1 max-w-xl mx-8">
-            <div className="relative w-full">
-              <input
-                type="text"
-                placeholder="İsim veya kelime ara..."
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary"
-              />
-              <Search className="absolute right-3 top-2.5 h-5 w-5 text-gray-400" />
+          {!isMobile && (
+            <div className="hidden md:flex items-center space-x-1 flex-1 max-w-xl mx-8">
+              <div className="relative w-full">
+                <input
+                  type="text"
+                  placeholder="İsim veya kelime ara..."
+                  className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary"
+                />
+                <Search className="absolute right-3 top-2.5 h-5 w-5 text-gray-400" />
+              </div>
             </div>
-          </div>
+          )}
 
-          <nav className="flex items-center space-x-6">
-            <Link href="/isimler" className="text-gray-700 hover:text-primary">
-              İsimler
-            </Link>
-            <Link href="/listeler" className="text-gray-700 hover:text-primary">
-              Listeler
-            </Link>
-            <Link href="/blog" className="text-gray-700 hover:text-primary">
-              Blog
-            </Link>
-            <Link href="/forum" className="text-gray-700 hover:text-primary">
-              Forum
-            </Link>
-            <Link
-              href="/bebek-isim-dna"
-              className="hidden md:block bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90"
-            >
-              İsim DNA
-            </Link>
-          </nav>
+          {isMobile ? (
+            <Button variant="ghost" size="icon" onClick={toggleMobileMenu}>
+              <Menu className="h-6 w-6" />
+            </Button>
+          ) : (
+            <nav className="hidden md:flex items-center space-x-6">
+              <Link href="/isim" className="text-gray-700 hover:text-primary">
+                İsimler
+              </Link>
+              <Link href="/listeler" className="text-gray-700 hover:text-primary">
+                Listeler
+              </Link>
+              <Link href="/blog" className="text-gray-700 hover:text-primary">
+                Blog
+              </Link>
+              <Link href="/forum" className="text-gray-700 hover:text-primary">
+                Forum
+              </Link>
+              <Link href="/hakkimizda" className="text-gray-700 hover:text-primary">
+                Hakkımızda
+              </Link>
+              <Link href="/bebek-isim-dna" className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90">
+                İsim DNA
+              </Link>
+            </nav>
+          )}
         </div>
       </div>
+      {isMobile && <MobileMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />}
     </header>
   )
 }
-

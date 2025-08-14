@@ -10,4 +10,3 @@ export interface SliderProps {
   slides: Slide[]
   autoPlayInterval?: number
 }
-

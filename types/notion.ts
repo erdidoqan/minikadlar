@@ -45,6 +45,64 @@ export interface NotionBlogPost {
   }
 }
 
+export interface NotionNameEntry {
+  id: string
+  cover?: {
+    type: string
+    external?: {
+      url: string
+    }
+  }
+  icon?: {
+    type: string
+    emoji?: string
+  }
+  properties: {
+    Name?: {
+      title?: Array<{
+        plain_text?: string
+      }>
+    }
+    Published?: {
+      date?: {
+        start?: string
+      }
+    }
+    Slug?: {
+      rich_text?: Array<{
+        plain_text?: string
+      }>
+    }
+    Tags?: {
+      multi_select?: Array<{
+        name: string
+        color: string
+      }>
+    }
+    Description?: {
+      rich_text?: Array<{
+        plain_text?: string
+      }>
+    }
+    Meaning?: {
+      rich_text?: Array<{
+        plain_text?: string
+      }>
+    }
+    Origin?: {
+      select?: {
+        name: string
+      }
+    }
+    Gender?: {
+      select?: {
+        name: string
+      }
+    }
+  }
+  last_edited_time?: string
+}
+
 export interface NotionBlock {
   object: string
   id: string
@@ -179,3 +237,12 @@ export interface NotionParagraphBlock extends NotionBlock {
   }
 }
 
+export interface NotionEmbedBlock extends NotionBlock {
+  type: "embed"
+  embed: {
+    url: string
+    caption?: Array<{
+      plain_text: string
+    }>
+  }
+}
